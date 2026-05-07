@@ -23,9 +23,9 @@ jobs:
     needs: build-ci-image
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -40,9 +40,9 @@ jobs:
     needs: [build-ci-image]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -71,9 +71,9 @@ jobs:
     needs: [build-ci-image]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -100,9 +100,9 @@ jobs:
     needs: [build-ci-image]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -132,9 +132,9 @@ jobs:
     needs: [build-ci-image, check-rust-formatting, lint-rust, test-rust]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -162,9 +162,9 @@ jobs:
     needs: [build-ci-image]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -233,11 +233,11 @@ jobs:
     needs: [build-ci-image, build-rust, build-lean, ensure-noir-version]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
-      LAMPE_TEST_CURRENT_COMMIT_SHA: ${{ github.head_ref || github.ref_name }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
+      LAMPE_TEST_CURRENT_COMMIT_SHA: ${{ github.sha }}
       LAMPE_KEEP_LAKE_CACHE: "1"
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -331,11 +331,11 @@ jobs:
     needs: [build-ci-image, build-rust, build-stdlib, build-lean, ensure-noir-version]
     runs-on: ubuntu-latest
     env:
-      CI_IMAGE: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
-      LAMPE_TEST_CURRENT_COMMIT_SHA: ${{ github.head_ref || github.ref_name }}
+      CI_IMAGE: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
+      LAMPE_TEST_CURRENT_COMMIT_SHA: ${{ github.sha }}
       LAMPE_KEEP_LAKE_CACHE: "1"
     container:
-      image: ghcr.io/reilabs/lampe-ci:${{ needs.build-ci-image.outputs.image_tag }}
+      image: ghcr.io/eduardogbg/lampe-fork-ci-test:${{ needs.build-ci-image.outputs.image_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
