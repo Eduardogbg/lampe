@@ -34,7 +34,7 @@ jobs:
       - name: Check CI Image
         id: check
         continue-on-error: true
-        run: python3 scripts/ci/verify_ci_image.py ghcr.io/reilabs/lampe-ci:${{ steps.versions.outputs.image_tag }}
+        run: python3 scripts/ci/verify_ci_image.py ghcr.io/eduardogbg/lampe-fork-ci-test:${{ steps.versions.outputs.image_tag }}
       - name: Set Up Docker Buildx
         if: steps.check.outcome == 'failure' && inputs.allow_push
         uses: docker/setup-buildx-action@v3
@@ -47,9 +47,9 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/reilabs/lampe-ci:latest
-            ghcr.io/reilabs/lampe-ci:sha-${{ github.sha }}
-            ghcr.io/reilabs/lampe-ci:${{ steps.versions.outputs.image_tag }}
+            ghcr.io/eduardogbg/lampe-fork-ci-test:latest
+            ghcr.io/eduardogbg/lampe-fork-ci-test:sha-${{ github.sha }}
+            ghcr.io/eduardogbg/lampe-fork-ci-test:${{ steps.versions.outputs.image_tag }}
           build-args: |
             RUST_TOOLCHAIN_STABLE=${{ steps.versions.outputs.rust_stable }}
             LEAN_TOOLCHAIN=${{ steps.versions.outputs.lean_toolchain }}
@@ -57,5 +57,5 @@ jobs:
       - name: Fail If Image Missing
         if: steps.check.outcome == 'failure' && !inputs.allow_push
         run: |
-          echo "CI image ghcr.io/reilabs/lampe-ci:${{ steps.versions.outputs.image_tag }} is missing and cannot be built from a fork."
+          echo "CI image ghcr.io/eduardogbg/lampe-fork-ci-test:${{ steps.versions.outputs.image_tag }} is missing and cannot be built from a fork."
           exit 1
