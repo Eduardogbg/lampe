@@ -234,12 +234,7 @@ def assert_extraction_matches(working_dir, original_dir):
     subprocess.run(diff_cmd, check=True)
 
 def build_lake(lampe_dir):
-    env = os.environ.copy()
-    if "CI" in env:
-        env.pop("CI", None)
-        subprocess.run(["lake", "exe", "cache", "get"], check=True, cwd=lampe_dir, env=env)
-
-    subprocess.run(["lake", "build"], check=True, cwd=lampe_dir, env=env)
+    subprocess.run(["lake", "build"], check=True, cwd=lampe_dir)
 
 def run_test_in_dir(working_dir, original_dir, update_mode):
     cd @(working_dir)
