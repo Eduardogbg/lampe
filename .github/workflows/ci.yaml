@@ -361,6 +361,13 @@ jobs:
           key: lampe-build-${{ runner.os }}-${{ hashFiles('Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml') }}
           restore-keys: |
             lampe-build-${{ runner.os }}-
+      - name: Restore Stdlib Build Cache
+        uses: actions/cache/restore@v4
+        with:
+          path: stdlib/lampe/.lake/build
+          key: stdlib-build-${{ runner.os }}-${{ hashFiles('stdlib/src/**', 'stdlib/Nargo.toml', 'stdlib/test.xsh', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+          restore-keys: |
+            stdlib-build-${{ runner.os }}-
       - name: Point Stdlib Lake Packages At Shared Cache
         run: |
           mkdir -p stdlib/lampe/.lake
