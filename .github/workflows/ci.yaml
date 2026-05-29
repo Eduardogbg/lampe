@@ -407,6 +407,68 @@ jobs:
         run: cargo build --release
       - name: Ensure CLI Executable
         run: chmod +x target/release/lampe
+      # Per-test build caches. Each test is scoped to the .lake/build
+      # directories under its own testing/<Name>/ tree, keyed on the
+      # contents of that test directory plus the things that can
+      # invalidate elaboration: Lampe, stdlib, the CLI, and the test
+      # harness scripts. On a hit the test's `lake build` step in
+      # scripts/test.xsh is incremental down to a no-op.
+      - name: Restore Base64 E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/Base64/**/.lake/build
+            !testing/Base64/**/.lake/packages/**
+          key: e2e-test-Base64-${{ runner.os }}-${{ hashFiles('testing/Base64/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore Complexnr E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/Complexnr/**/.lake/build
+            !testing/Complexnr/**/.lake/packages/**
+          key: e2e-test-Complexnr-${{ runner.os }}-${{ hashFiles('testing/Complexnr/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore ExtractionTests E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/ExtractionTests/**/.lake/build
+            !testing/ExtractionTests/**/.lake/packages/**
+          key: e2e-test-ExtractionTests-${{ runner.os }}-${{ hashFiles('testing/ExtractionTests/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore Merkle E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/Merkle/**/.lake/build
+            !testing/Merkle/**/.lake/packages/**
+          key: e2e-test-Merkle-${{ runner.os }}-${{ hashFiles('testing/Merkle/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore MerkleFromScratch E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/MerkleFromScratch/**/.lake/build
+            !testing/MerkleFromScratch/**/.lake/packages/**
+          key: e2e-test-MerkleFromScratch-${{ runner.os }}-${{ hashFiles('testing/MerkleFromScratch/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore Multiple E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/Multiple/**/.lake/build
+            !testing/Multiple/**/.lake/packages/**
+          key: e2e-test-Multiple-${{ runner.os }}-${{ hashFiles('testing/Multiple/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore Sort E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/Sort/**/.lake/build
+            !testing/Sort/**/.lake/packages/**
+          key: e2e-test-Sort-${{ runner.os }}-${{ hashFiles('testing/Sort/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
+      - name: Restore TestDep E2E Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            testing/TestDep/**/.lake/build
+            !testing/TestDep/**/.lake/packages/**
+          key: e2e-test-TestDep-${{ runner.os }}-${{ hashFiles('testing/TestDep/**', 'Lampe/**/*.lean', 'Lampe/**/*.toml', 'Lampe/**/*.json', 'Lampe/lean-toolchain', 'Lampe/lake-manifest.json', 'Lampe/lakefile.toml', 'stdlib/lampe/**/*.lean', 'stdlib/lampe/lean-toolchain', 'stdlib/lampe/lake-manifest.json', 'stdlib/lampe/lakefile.toml', 'stdlib/src/**', 'stdlib/Nargo.toml', 'scripts/test.xsh', 'scripts/utils.xsh', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'src/**') }}
       - name: Restore E2E Cache
         id: e2e-cache
         uses: actions/cache@v4
